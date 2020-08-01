@@ -16,11 +16,11 @@ Just run `bash ./scripts/build.sh` or `make install`, then you'll be able to use
 
 Just start it by `generatord start` and you should see it synchronizing the blocks. 
 
-If you want to become a validator, please check the docs <https://docs.generator-crypto.com/en/validator.html>
+If you want to become a validator, please check the docs <https://>
 
 ## Resources
 
-## * Website: <https://generator-crypto.com/en/>
-## * Explorer: <https://explorer.generator-crypto.com>
-## * Docs: <https://docs.generator-crypto.com/en/>
-## * Telegram channel: <https://t.me/generator_world>
+## * Website: <https://>
+## * Explorer: <https://>
+## * Docs: <https://>
+## * Telegram channel: <https://>
