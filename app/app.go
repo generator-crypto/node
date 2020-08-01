@@ -115,7 +115,7 @@ type NewApp struct {
 	coinsKeeper     coins.Keeper
 	posminingKeeper posmining.Keeper
 	structureKeeper structure.Keeper
-	ouroKeeper      generator.Keeper
+	gnrtKeeper      generator.Keeper
 
 	// Module Manager
 	mm *module.Manager
@@ -271,7 +271,7 @@ func NewInitApp(
 	)
 
 	// Helping keeper that's mostly being used for the API calls
-	app.ouroKeeper = generator.NewKeeper(
+	app.gnrtKeeper = generator.NewKeeper(
 		app.cdc,
 		app.accountKeeper,
 		app.bankKeeper,
@@ -306,7 +306,7 @@ func NewInitApp(
 		coins.NewAppModule(app.coinsKeeper, app.bankKeeper),
 		posmining.NewAppModule(app.posminingKeeper),
 		structure.NewAppModule(app.structureKeeper),
-		generator.NewAppModule(app.ouroKeeper, app.paramsKeeper, app.bankKeeper, app.emissionKeeper),
+		generator.NewAppModule(app.gnrtKeeper, app.paramsKeeper, app.bankKeeper, app.emissionKeeper),
 		supply.NewAppModule(app.supplyKeeper, app.accountKeeper),
 		distr.NewAppModule(app.distrKeeper, app.accountKeeper, app.supplyKeeper, app.stakingKeeper),
 		gov.NewAppModule(app.govKeeper, app.accountKeeper, app.supplyKeeper),
