@@ -7,7 +7,7 @@ import (
 // Returns default gnrt coin
 func GetDefaultCoin() Coin {
 	// Default generator record - threshold is 2m coins
-	return Coin{Name: "generator", Symbol: "gnrt", Default: true, PosminingThreshold: sdk.NewIntWithDecimal(2000000, 6)}
+	return Coin{Name: "Generator", Symbol: "gnrt", Default: true, PosminingThreshold: sdk.NewIntWithDecimal(2000000, 6)}
 }
 
 // Returns a stub record of the coin
