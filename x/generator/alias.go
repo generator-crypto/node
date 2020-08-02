@@ -40,5 +40,5 @@ type (
 )
 
 const (
-	gnrt = types.gnrt
+	GNRT = types.GNRT
 )
