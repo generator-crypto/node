@@ -9,7 +9,7 @@ const (
 	PARAMINING_THRESHOLD = 2000000  // posmining threshold
 )
 
-func NewgnrtCoin(amount int64) sdk.Coin {
+func NewGnrtCoin(amount int64) sdk.Coin {
 	return sdk.NewInt64Coin(GNRT, amount)
 }
 
