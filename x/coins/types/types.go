@@ -171,8 +171,8 @@ func GetDailyPercent(balance sdk.Int) sdk.Int {
 		return sdk.NewInt(9)
 	}
 	
-		if InBetween(balance, 25000000000, 49999999999) {
-		return sdk.NewInt(10)
+        if InBetween(balance, 25000000000, 49999999999) {
+	        return sdk.NewInt(10)
 	}
 
 	if InBetween(balance, 50000000000, 99999999999) {
