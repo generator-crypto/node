@@ -115,34 +115,54 @@ func GetStructureCoff(balance sdk.Int) sdk.Int {
 	}
 
 	if InBetween(balance, 1000000000, 9999999999) {
-		return sdk.NewInt(200)
+		return sdk.NewInt(220)
 	}
 
 	if InBetween(balance, 10000000000, 49999999999) {
-		return sdk.NewInt(225)
+		return sdk.NewInt(240)
 	}
 	
 	if InBetween(balance, 50000000000, 99999999999) {
-		return sdk.NewInt(250)
+		return sdk.NewInt(260)
 	}	
 
 	if InBetween(balance, 100000000000, 499999999999) {
-		return sdk.NewInt(275)
+		return sdk.NewInt(280)
 	}
 
 	if InBetween(balance, 500000000000, 999999999999) {
 		return sdk.NewInt(300)
 	}
 
-	if InBetween(balance, 1000000000000, 4999999999999) {
-		return sdk.NewInt(325)
+	if InBetween(balance, 1000000000000, 2499999999999) {
+		return sdk.NewInt(320)
+	}
+	
+	if InBetween(balance, 2500000000000, 4999999999999) {
+		return sdk.NewInt(340)
+	}
+	
+        if InBetween(balance, 5000000000000, 9999999999999) {
+		return sdk.NewInt(360)
 	}
 
-	if InBetween(balance, 5000000000000, 9999999999999) {
-		return sdk.NewInt(350)
+	if InBetween(balance, 10000000000000, 49999999999999) {
+		return sdk.NewInt(380)
+	}
+	
+	if InBetween(balance, 50000000000000, 99999999999999) {
+		return sdk.NewInt(400)
+	}
+	
+	if InBetween(balance, 100000000000000, 499999999999999) {
+		return sdk.NewInt(420)
 	}
 
-	return sdk.NewInt(375)
+	if InBetween(balance, 500000000000000, 999999999999999) {
+		return sdk.NewInt(440)
+	}
+
+	return sdk.NewInt(460)
 }
 
 // Возвращает дневной процент в зависимости от баланса
@@ -152,40 +172,44 @@ func GetDailyPercent(balance sdk.Int) sdk.Int {
 	}
 
 	if InBetween(balance, 10000, 99999999) {
-		return sdk.NewInt(5)
+		return sdk.NewInt(6)
 	}
 
 	if InBetween(balance, 100000000, 999999999) {
-		return sdk.NewInt(6)
+		return sdk.NewInt(7)
 	}
 	
 	if InBetween(balance, 1000000000, 4999999999) {
-		return sdk.NewInt(7)
+		return sdk.NewInt(8)
 	}	
 
 	if InBetween(balance, 5000000000, 9999999999) {
-		return sdk.NewInt(8)
+		return sdk.NewInt(9)
 	}
 
 	if InBetween(balance, 10000000000, 24999999999) {
-		return sdk.NewInt(9)
+		return sdk.NewInt(10)
 	}
 	
         if InBetween(balance, 25000000000, 49999999999) {
-	        return sdk.NewInt(10)
+	        return sdk.NewInt(11)
 	}
 
 	if InBetween(balance, 50000000000, 99999999999) {
-		return sdk.NewInt(11)
+		return sdk.NewInt(12)
 	}
 	
 	if InBetween(balance, 100000000000, 249999999999) {
-		return sdk.NewInt(12)
+		return sdk.NewInt(13)
 	}	
 
 	if InBetween(balance, 250000000000, 499999999999) {
-		return sdk.NewInt(13)
+		return sdk.NewInt(14)
+	}
+	
+        if InBetween(balance, 500000000000, 999999999999) {
+		return sdk.NewInt(15)
 	}
 
-	return sdk.NewInt(14)
+	return sdk.NewInt(16)
 }
