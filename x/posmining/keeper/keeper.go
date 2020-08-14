@@ -116,20 +116,6 @@ func (k Keeper) UpdateDailyPercent(ctx sdk.Context, addr sdk.AccAddress, coin co
 	}
 }
 
-// Fetches the current price and updates posmining regulation
-func (k Keeper) UpdateRegulation(ctx sdk.Context, currentPrice sdk.Int) {
-	regulation := k.GetCorrection(ctx)
-
-	coff := regulation.GetCoff(currentPrice)
-
-	// If the coff should be changed and since the latest update passed at least types.CorrectionUpdatePeriod hours
-	if !regulation.CorrectionCoff.Equal(coff) && ctx.BlockTime().Sub(regulation.StartDate).Hours() >= types.CorrectionUpdatePeriod {
-		regulation.Update(ctx.BlockTime(), currentPrice, coff)
-
-		k.SetCorrection(ctx, regulation)
-	}
-}
-
 // We need to save delegators posmining before they get slashed
 func (k Keeper) UpdateDelegatorsBeforeSlashing(ctx sdk.Context, valAddr sdk.ValAddress) {
 	delegations := k.stakingKeeper.GetValidatorDelegations(ctx, valAddr)
@@ -154,7 +140,7 @@ func (k Keeper) GetPosminingResolve(ctx sdk.Context, owner sdk.AccAddress, coin 
 	if len(posminingGroup.Periods) > 0 {
 		currentPeriod = posminingGroup.Periods[len(posminingGroup.Periods)-1]
 	} else {
-		currentPeriod = types.PosminingPeriod{SavingCoff: sdk.NewInt(0), CorrectionCoff: sdk.NewInt(0)}
+		currentPeriod = types.PosminingPeriod{SavingCoff: sdk.NewInt(0)}
 	}
 
 	if coin.PosminingThreshold.IsPositive() && balance.Add(posminingGroup.Paramined).GTE(coin.PosminingThreshold) {
@@ -169,8 +155,7 @@ func (k Keeper) GetPosminingResolve(ctx sdk.Context, owner sdk.AccAddress, coin 
 		Coin:           coin.Symbol,
 		Posmining:      posmining,
 		SavingsCoff:    currentPeriod.SavingCoff,
-		CorrectionCoff: currentPeriod.CorrectionCoff,
 		Posmined:       posmining.Paramined.Add(posminingGroup.Paramined),
-		CoinsPerTime:   types.NewCoinsPerTime(balance, posmining.DailyPercent, posmining.StructureCoff, currentPeriod.SavingCoff, currentPeriod.CorrectionCoff),
+		CoinsPerTime:   types.NewCoinsPerTime(balance, posmining.DailyPercent, posmining.StructureCoff, currentPeriod.SavingCoff),
 	}
 }
