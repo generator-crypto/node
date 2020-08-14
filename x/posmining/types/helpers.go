@@ -110,7 +110,6 @@ func NewTimeDifference(seconds sdk.Int) TimeDifference {
 type PosminingPeriod struct {
 	Start          time.Time `json:"start"`       // Начало периода
 	End            time.Time `json:"end"`         // конец периода
-	CorrectionCoff sdk.Int   `json:"regulation"`  // Регуляция
 	SavingCoff     sdk.Int   `json:"saving_coff"` // Коэффициент накопления
 }
 
@@ -146,7 +145,7 @@ func NewPosminingGroup(posmining Posmining, balance sdk.Int) PosminingGroup {
 
 // Adds a posmining period
 func (p *PosminingGroup) Add(period PosminingPeriod) {
-	perTime := NewCoinsPerTime(p.Balance, p.Posmining.DailyPercent, p.Posmining.StructureCoff, period.SavingCoff, period.CorrectionCoff)
+	perTime := NewCoinsPerTime(p.Balance, p.Posmining.DailyPercent, p.Posmining.StructureCoff, period.SavingCoff)
 
 	timeDiff := period.TimePass()
 
