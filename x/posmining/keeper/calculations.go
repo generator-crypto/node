@@ -19,7 +19,7 @@ func (k Keeper) GetSavingPeriods(ctx sdk.Context, posmining types.Posmining) []t
 	secondsDiff := int64(ctx.BlockTime().Sub(lastTx).Seconds())
 
 	if secondsDiff < daysSeparator {
-		return []types.PosminingPeriod{types.NewPosminingPeriod(lastTx, ctx.BlockTime(), sdk.NewInt(0), sdk.NewInt(0))}
+		return []types.PosminingPeriod{types.NewPosminingPeriod(lastTx, ctx.BlockTime(), sdk.NewInt(0))}
 	}
 
 	periods := secondsDiff / daysSeparator
@@ -60,7 +60,7 @@ func (k Keeper) GetPosminingGroup(ctx sdk.Context, posmining types.Posmining, co
 
 	// For the custom coins, we just have to apply the usual percents during the whole time
 	if !coin.Default {
-		group.Add(types.NewPosminingPeriod(posmining.LastCharged, ctx.BlockTime(), sdk.NewInt(0), sdk.NewInt(0)))
+		group.Add(types.NewPosminingPeriod(posmining.LastCharged, ctx.BlockTime(), sdk.NewInt(0)))
 
 		return group
 	}
