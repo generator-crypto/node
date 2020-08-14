@@ -168,11 +168,9 @@ func (k Keeper) GetPosminingResolve(ctx sdk.Context, owner sdk.AccAddress, coin 
 	return types.PosminingResolve{
 		Coin:           coin.Symbol,
 		Posmining:      posmining,
-		Paramining:     posmining,
 		SavingsCoff:    currentPeriod.SavingCoff,
 		CorrectionCoff: currentPeriod.CorrectionCoff,
 		Posmined:       posmining.Paramined.Add(posminingGroup.Paramined),
-		Paramined:      posmining.Paramined.Add(posminingGroup.Paramined),
 		CoinsPerTime:   types.NewCoinsPerTime(balance, posmining.DailyPercent, posmining.StructureCoff, currentPeriod.SavingCoff, currentPeriod.CorrectionCoff),
 	}
 }
