@@ -15,7 +15,7 @@ type CoinsPerTime struct {
 }
 
 // Calculates and returns new CoinsPerTime
-func NewCoinsPerTime(balance sdk.Int, dailyPercent sdk.Int, structureCoff sdk.Int, savingsCoff sdk.Int) CoinsPerTime {
+func NewCoinsPerTime(balance sdk.Int, dailyPercent sdk.Int, structureCoff sdk.Int, savingsCoff sdk.Int, regulationCOff sdk.Int) CoinsPerTime {
 	result := CoinsPerTime{
 		Day:    sdk.NewInt(0),
 		Hour:   sdk.NewInt(0),
@@ -34,6 +34,11 @@ func NewCoinsPerTime(balance sdk.Int, dailyPercent sdk.Int, structureCoff sdk.In
 
 	if savingsCoff.IsZero() == false {
 		actualPercent = actualPercent.Mul(savingsCoff)
+		toQuo = toQuo.MulRaw(100)
+	}
+
+	if regulationCOff.IsZero() == false {
+		actualPercent = actualPercent.Mul(regulationCOff)
 		toQuo = toQuo.MulRaw(100)
 	}
 
@@ -105,6 +110,7 @@ func NewTimeDifference(seconds sdk.Int) TimeDifference {
 type PosminingPeriod struct {
 	Start          time.Time `json:"start"`       // Начало периода
 	End            time.Time `json:"end"`         // конец периода
+	CorrectionCoff sdk.Int   `json:"regulation"`  // Регуляция
 	SavingCoff     sdk.Int   `json:"saving_coff"` // Коэффициент накопления
 }
 
@@ -113,10 +119,11 @@ func (p PosminingPeriod) TimePass() TimeDifference {
 	return NewTimeDifference(sdk.NewInt(int64(p.End.Sub(p.Start).Seconds())))
 }
 
-func NewPosminingPeriod(start time.Time, end time.Time, savingCoff sdk.Int) PosminingPeriod {
+func NewPosminingPeriod(start time.Time, end time.Time, regulationCoff sdk.Int, savingCoff sdk.Int) PosminingPeriod {
 	return PosminingPeriod{
 		start,
 		end,
+		regulationCoff,
 		savingCoff,
 	}
 }
@@ -139,7 +146,7 @@ func NewPosminingGroup(posmining Posmining, balance sdk.Int) PosminingGroup {
 
 // Adds a posmining period
 func (p *PosminingGroup) Add(period PosminingPeriod) {
-	perTime := NewCoinsPerTime(p.Balance, p.Posmining.DailyPercent, p.Posmining.StructureCoff, period.SavingCoff)
+	perTime := NewCoinsPerTime(p.Balance, p.Posmining.DailyPercent, p.Posmining.StructureCoff, period.SavingCoff, period.CorrectionCoff)
 
 	timeDiff := period.TimePass()
 
