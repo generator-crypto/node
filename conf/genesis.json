@@ -20,6 +20,12 @@
   "app_hash": "",
   "app_state": {
     "posmining": {
+      "Correction": {
+        "start_date": "2019-09-01T00:00:00Z",
+        "opening_price": "100",
+        "correction_coff": "100",
+        "previous_corrections": []
+      },
       "Records": []
     },
     "auth": {
