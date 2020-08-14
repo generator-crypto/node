@@ -14,8 +14,6 @@ type PosminingResolve struct {
 
 	SavingsCoff  sdk.Int      `json:"savings_coff"`
 
-	CorrectionCoff  sdk.Int      `json:"correction_coff"`
-
 	Posmining   Posmining   `json:"posmining"`
 
 	CoinsPerTime CoinsPerTime `json:"coins_per_time"`
