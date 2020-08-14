@@ -7,7 +7,6 @@ import (
 
 // GenesisState - all posmining state that must be provided at genesis
 type GenesisState struct {
-	Correction Correction
 	Records  []Posmining
 }
 
