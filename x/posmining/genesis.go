@@ -10,6 +10,8 @@ import (
 // InitGenesis initialize default parameters
 // and the keeper's address to pubkey map
 func InitGenesis(ctx sdk.Context, k Keeper, data GenesisState) {
+	k.SetCorrection(ctx, data.Correction)
+
 	defaultCoin := coins.GetDefaultCoin()
 
 	for _, record := range data.Records {
@@ -28,10 +30,15 @@ func ExportGenesis(ctx sdk.Context, k Keeper) (data GenesisState) {
 	for ; iterator.Valid(); iterator.Next() {
 		var posmining types.Posmining
 
+		// Regulation record
+		if bytes.Compare(iterator.Key(), []byte("correction")) == 0 {
+			continue
+		}
+
 		k.Cdc.MustUnmarshalBinaryBare(iterator.Value(), &posmining)
 
 		records = append(records, posmining)
 	}
 
-	return NewGenesisState(ctx, records)
+	return NewGenesisState(k.GetCorrection(ctx), records)
 }
