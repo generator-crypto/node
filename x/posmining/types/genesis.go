@@ -2,7 +2,6 @@ package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"time"
 )
 
 // GenesisState - all posmining state that must be provided at genesis
