@@ -1,7 +1,7 @@
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"time"
 )
 
 // GenesisState - all posmining state that must be provided at genesis
@@ -21,6 +21,7 @@ func DefaultGenesisState() GenesisState {
 	startDate := time.Date(2019, 9, 1, 0, 0, 0, 0, time.UTC)
 
 	return GenesisState{
+	        StartDate: startDate,
 		Records:  make([]Posmining, 0),
 	}
 }
