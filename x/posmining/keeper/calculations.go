@@ -30,7 +30,6 @@ func (k Keeper) GetSavingPeriods(ctx sdk.Context, posmining types.Posmining) []t
 
 	for i < periods {
 		result = append(result, types.NewPosminingPeriod(
-			lastTx.Add(time.Duration(daysSeparator*i)*time.Second),
 			lastTx.Add(time.Duration(daysSeparator*(i+1))*time.Second),
 			sdk.NewInt(0),
 			types.GetSavingCoff(int(i)),
@@ -44,7 +43,6 @@ func (k Keeper) GetSavingPeriods(ctx sdk.Context, posmining types.Posmining) []t
 		latestPeriod := lastTx.Add(time.Duration(daysSeparator*periods) * time.Second)
 
 		result = append(result, types.NewPosminingPeriod(
-			latestPeriod,
 			latestPeriod.Add(time.Duration(mod)*time.Second),
 			sdk.NewInt(0),
 			types.GetSavingCoff(int(periods)),
