@@ -1,0 +1,17 @@
+{
+  "title": "Param Change Unbonding",
+  "description": "We propose increasing",
+  "changes": [
+    {
+      "subspace": "staking",
+      "key": "unbonding_time",
+      "value": "600000000000"
+    }
+  ],
+  "deposit": [
+    {
+      "denom": "plan",
+      "amount": "10000000"
+    }
+  ]
+}
